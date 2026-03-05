@@ -5,6 +5,7 @@ colorFrom: blue
 colorTo: green
 sdk: gradio
 sdk_version: 4.19.2
+python_version: 3.10
 app_file: backend-ai/app.py
 app_path: backend-ai
 pinned: false
