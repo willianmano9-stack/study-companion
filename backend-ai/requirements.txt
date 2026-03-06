@@ -1,4 +1,5 @@
 supabase
 python-dotenv
 google-generativeai
-gradio>=4.44.1
+huggingface-hub<1.0
+gradio==4.44.1
