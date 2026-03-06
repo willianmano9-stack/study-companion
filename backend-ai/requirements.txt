@@ -1,5 +1,5 @@
 supabase
 python-dotenv
 google-generativeai
-huggingface-hub<1.0
+huggingface-hub<0.25.0
 gradio==4.44.1
