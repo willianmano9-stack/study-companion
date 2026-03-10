@@ -25,7 +25,7 @@ def generate_socratic_insight(image_path, context_lesson):
     """
     Analisa a imagem do caderno e gera uma pista pedagógica.
     """
-    model = genai.GenerativeModel('gemini-1.5-flash', system_instruction=SYSTEM_PROMPT)
+    model = genai.GenerativeModel('gemini-2.0-flash')
     
     img = Image.open(image_path)
     
