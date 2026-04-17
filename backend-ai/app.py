@@ -1,5 +1,8 @@
 import gradio as gr
 import os
+from dotenv import load_dotenv
+
+load_dotenv() # Carrega o nosso novo arquivo .env
 from src.supabase_client import get_supabase
 from src.socratic_engine import generate_socratic_insight
 
@@ -30,7 +33,7 @@ def process_notebook(student_name, lesson_context, notebook_img):
         # 3. Salvar a análise na tabela 'tarefas'
         # O status 'analisado' indica que a IA já processou este registro.
         supabase.table("tarefas").insert({
-            "perfil_id": student_id,
+            "aluno_id": student_id,
             "titulo": f"Análise Socrática: {lesson_context}",
             "descricao": f"Registro fotográfico da aula sobre {lesson_context}",
             "status": "analisado",
@@ -50,10 +53,9 @@ with gr.Blocks(theme=gr.themes.Soft(), title="Study Companion Admin") as demo:
     with gr.Row():
         with gr.Column():
             # Seleção baseada nos dados do seu seed_data.sql
-            student_dropdown = gr.Dropdown(
-                label="Selecionar Aluno", 
-                choices=["Joaquim Silva", "Maria Oliveira"], 
-                value="Joaquim Silva"
+            student_input = gr.Textbox(
+                label = "Nome do Aluno",
+                placeholder="Insira o nome completo do aluno",
             )
             context_input = gr.Textbox(
                 label="Contexto da Aula", 
@@ -71,7 +73,7 @@ with gr.Blocks(theme=gr.themes.Soft(), title="Study Companion Admin") as demo:
 
     submit_btn.click(
         fn=process_notebook,
-        inputs=[student_dropdown, context_input, image_input],
+        inputs=[student_input, context_input, image_input],
         outputs=output_display
     )
 
